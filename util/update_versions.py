@@ -49,7 +49,7 @@ def updateSourcesVersions(sources, version):
 		sys.stdout.write('Updated ' + sourcefile + '\n')
 
 def updateReadme(version):
-	readmefile = '../README.md';
+	readmefile = os.path.normpath('../README.md')
 	for i, line in enumerate(fileinput.input(readmefile, inplace=True)):
 		if i == 5:
 			print('v' + version)
@@ -58,7 +58,7 @@ def updateReadme(version):
 	sys.stdout.write('Updated ' + readmefile + '\n')
 
 def updateResourceFile(version):
-	rcfile = '../res/MapWiz.rc'
+	rcfile = os.path.normpath('../res/MapWiz.rc')
 	vsplit = version.split(' ')[0] # first split to remove the optional 2nd param
 	vsplit2 = vsplit.split('.') # second split to get plain version numbers
 	for i, line in enumerate(fileinput.input(rcfile, inplace=True)):
@@ -73,7 +73,7 @@ def updateResourceFile(version):
 	sys.stdout.write('Updated ' + rcfile + '\n')
 
 def updateConstH(version):
-	consthfile = '../src/const.h'
+	consthfile = os.path.normpath('../src/const.h')
 	for i, line in enumerate(fileinput.input(consthfile, inplace=True)):
 		if i == 29:
 			nextline = '\tconst char* const MAPWIZ_VERSION = "{version}";'.format(version = version)

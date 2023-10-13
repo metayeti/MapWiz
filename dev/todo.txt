@@ -1,4 +1,5 @@
 - 0.0.2 -
+[ ] Make application icon on high dpi scale correctly (on Windows)
 [ ] New Map dialog
 [ ] Persistent window geometry
 [x] Version update util
