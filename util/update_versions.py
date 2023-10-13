@@ -9,7 +9,7 @@
 #
 #  !! WARNING !!
 #  For safety, always run on a clean working tree, then diff and make sure
-#  everything is in order before commiting to branch!
+#  everything is in order before committing to branch!
 #
 #  ---
 #
