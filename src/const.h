@@ -26,7 +26,8 @@
 namespace mw
 {
 	// current MapWiz version
-	const char* const MAPWIZ_VERSION = "0.0.1";
+	// the following entry HAS to exist on line 30 so that "update_versions" utility can propery update it
+	const char* const MAPWIZ_VERSION = "0.0.2 dev";
 
 	// filenames
 	const char* const FILE_CFG_INI = "MapWiz.ini";

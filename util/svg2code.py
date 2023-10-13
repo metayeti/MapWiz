@@ -34,5 +34,5 @@ if __name__ == '__main__':
 		sys.exit(0)
 
 	inputFilename = sys.argv[2]
-	output = outputFormat.format(varName=sys.argv[1], data=readTextFile(inputFilename))
+	output = outputFormat.format(varName = sys.argv[1], data = readTextFile(inputFilename))
 	sys.stdout.write(output)

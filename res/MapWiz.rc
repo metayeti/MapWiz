@@ -83,7 +83,7 @@ BEGIN
             VALUE "LegalCopyright", "(c) 2024-present Danijel Durakovic"
             VALUE "OriginalFilename", "MapWiz.exe"
             VALUE "ProductName", "MapWiz"
-            VALUE "ProductVersion", "0.0.1.0"
+            VALUE "ProductVersion", "0.0.2.0"
         END
     END
     BLOCK "VarFileInfo"
