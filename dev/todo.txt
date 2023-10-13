@@ -1,7 +1,7 @@
 - 0.0.2 -
-[ ] Version update util
 [ ] New Map dialog
-[ ] Configuration + persistent window geometry
+[ ] Persistent window geometry
+[x] Version update util
 
 - 0.0.1 -
 [x] Inject config util
