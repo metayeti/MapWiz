@@ -5,7 +5,7 @@
 #
 #  ---
 #
-#  This utility injects data from dev/config.ini into src/res/config_resources.h
+#  This utility injects data from dev/config.ini into src/res/ini_resources.h
 #
 #  !! WARNING !!
 #  For safety, always run on a clean working tree, then diff and make sure
@@ -21,7 +21,7 @@ import fileinput
 import sys
 
 # target source file
-targetFile = '../src/res/config_resources.h'
+targetFile = '../src/res/ini_resources.h'
 
 # input INI file
 inputFile = '../dev/config.ini'
@@ -30,7 +30,7 @@ inputFile = '../dev/config.ini'
 lineToUpdate = 29
 
 # target string format
-lineFormat = '\tconst char* const CONFIG_INIDATA = "{inidata}";'
+lineFormat = '\tconst char* const INI_CONFIG = "{inidata}";'
 
 def readINIData():
     iniData = '';
