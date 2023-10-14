@@ -1,5 +1,4 @@
-![MapWiz](dev/logo/logo_64x64.png?raw=true)
-# MapWiz
+# MapWiz <img align="right" src="dev/logo/logo_512x512.png?raw=true" height="128">
 
 2D map editor
 
