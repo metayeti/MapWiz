@@ -40,7 +40,7 @@ void mw::FrmMain::StatusBar::OnSize(wxSizeEvent& e)
 }
 
 mw::FrmMain::StatusBar::StatusBar(wxWindow* parent, long style)
-: wxStatusBar(parent, wxID_ANY, style, wxT("MapWiz statusbar"))
+: wxStatusBar(parent, wxID_ANY, style, "MapWiz statusbar")
 {
 	int widths[Field_Max];
 	widths[Field_Text] = -1; // growable
@@ -50,16 +50,7 @@ mw::FrmMain::StatusBar::StatusBar(wxWindow* parent, long style)
 	SetStatusWidths(Field_Max, widths);
 
 	cmbZoomLevel = new wxComboBox(this, wxID_ANY, wxEmptyString);
-	cmbZoomLevel->Append(std::vector<wxString>{
-		wxT("25%"),
-		wxT("50%"),
-		wxT("75%"),
-		wxT("100%"),
-		wxT("125%"),
-		wxT("150%"),
-		wxT("175%"),
-		wxT("200%")
-	});
+	cmbZoomLevel->Append(std::vector<wxString>{ "25%", "50%", "75%", "100%", "125%", "150%", "175%", "200%" });
 	cmbZoomLevel->Select(3);
 
 	SetMinHeight(cmbZoomLevel->GetMinHeight());
