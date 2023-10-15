@@ -37,23 +37,23 @@ mw::DlgAbout::DlgAbout(wxWindow* parent)
 	// text info
 	innerHSizer->Add(
 		CreateTextSizer(
-			wxT("MapWiz\n")
-			wxT("2D map editor\n\n")
-			wxT("v") + _(MAPWIZ_VERSION) + wxT(" ")
+			"MapWiz\n"
+			"2D map editor\n\n"
+			"v" + wxString(MAPWIZ_VERSION) + " "
 #if defined(MW_SYSTEM_WINDOWS)
-			wxT("Windows")
+			"Windows"
 #elif defined(MW_SYSTEM_LINUX)
-			wxT("Linux")
+			"Linux"
 #elif defined(MW_SYSTEM_MACOS)
-			wxT("MacOS")
+			"MacOS"
 #endif
-			wxT(" build")
+			" build"
 #if defined(MW_DEBUG_BUILD)
-			wxT(" (debug)")
+			" (debug)"
 #endif
-			wxT("\n\n")
-			wxT("Copyright © 2024 Danijel Durakovic\n")
-			wxT("Licensed under the terms of GPLv3")
+			"\n\n"
+			"Copyright © 2024 Danijel Durakovic\n"
+			"Licensed under the terms of GPLv3"
 		),
 		0,
 		wxALL,
