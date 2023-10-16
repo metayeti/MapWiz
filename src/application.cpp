@@ -25,32 +25,33 @@ wxDECLARE_APP(mw::Application);
 
 bool mw::Application::OnInit()
 {
-	// load configuration
+	// load the application configuration
 	config.Read();
-	bool centerWindow = config.GetBool("startup", "center");
-	if (centerWindow)
-	{
-		// center first-time only
-		config.SetBool("startup", "center", false);
-	}
-	Config::T_UnsignedIntPair windowPosition = config.GetUnsignedIntPair("startup", "position");
-	Config::T_UnsignedIntPair windowSize = config.GetUnsignedIntPair("startup", "size");
-	bool maximizeWindow = config.GetBool("startup", "maximized");
+	// fetch window parameters from config
+	bool center = config.GetBool("startup", "center");
+	Config::T_UnsignedIntPair position = config.GetUnsignedIntPair("startup", "position");
+	Config::T_UnsignedIntPair size = config.GetUnsignedIntPair("startup", "size");
+	bool maximize = config.GetBool("startup", "maximize");
 	// setup the main application window
 	FrmMain* window = new FrmMain(this);
-	window->SetSize(window->FromDIP(wxSize(windowSize.first, windowSize.second)));
-	window->SetPosition(wxPoint(windowPosition.first, windowPosition.second));
-	if (centerWindow || maximizeWindow)
+	window->SetSize(window->FromDIP(wxSize(size.first, size.second)));
+	window->SetPosition(wxPoint(position.first, position.second));
+	if (center || maximize)
 	{
 		window->CenterOnScreen();
 	}
-	if (maximizeWindow)
+	if (maximize)
 	{
 		window->Maximize();
 	}
 	// display the main application window
 	window->Show(true);
 	return true;
+}
+
+mw::Config* mw::Application::GetConfig()
+{
+	return &config;
 }
 
 wxIMPLEMENT_APP(mw::Application);

@@ -18,6 +18,8 @@
 
 #include "../mapwiz.h"
 #include "../const.h"
+#include "../config.h"
+#include "../application.h"
 #include "frm_main.h"
 #include "dlg_about.h"
 #include "../res/svg_resources.h"
@@ -149,8 +151,37 @@ void mw::FrmMain::InitializeStatusBar()
 	PositionStatusBar();
 }
 
-mw::FrmMain::FrmMain(wxApp* owner)
-: wxFrame(nullptr, wxID_ANY, MAIN_WINDOW_TITLE), owner(owner)
+void mw::FrmMain::OnMove(wxMoveEvent& e)
+{
+	if (!IsMaximized())
+	{
+		lastWindowPosition = GetPosition();
+	}
+}
+
+void mw::FrmMain::OnSize(wxSizeEvent& e)
+{
+	if (!IsMaximized())
+	{
+		lastWindowSize = GetSize();
+	}
+}
+
+void mw::FrmMain::OnClose(wxCloseEvent& e)
+{
+	// save config before closing
+	auto* config = application->GetConfig();
+	config->SetBool("startup", "center", false);
+	config->SetUnsignedIntPair("startup", "position", { lastWindowPosition.x, lastWindowPosition.y });
+	config->SetUnsignedIntPair("startup", "size", { lastWindowSize.x, lastWindowSize.y });
+	config->SetBool("startup", "maximize", IsMaximized());
+	config->Write();
+	// destroy this frame
+	Destroy();
+}
+
+mw::FrmMain::FrmMain(Application* application)
+: wxFrame(nullptr, wxID_ANY, MAIN_WINDOW_TITLE), application(application)
 {
 	// frame setup
 	SetMinSize(FromDIP(wxSize(200, 200))); // set minimum frame size
@@ -166,4 +197,9 @@ mw::FrmMain::FrmMain(wxApp* owner)
 	// initialize components
 	InitializeGlobalMenu();
 	InitializeStatusBar();
+
+	// bind events
+	Bind(wxEVT_MOVE, &FrmMain::OnMove, this);
+	Bind(wxEVT_SIZE, &FrmMain::OnSize, this);
+	Bind(wxEVT_CLOSE_WINDOW, &FrmMain::OnClose, this);
 }

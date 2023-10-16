@@ -28,7 +28,11 @@ namespace mw
 	class FrmMain : public wxFrame
 	{
 	private:
-		wxApp* owner = nullptr;
+		Application* application = nullptr;
+
+		// most recent window geometry (for accurate config post-maximization)
+		wxPoint lastWindowPosition;
+		wxSize lastWindowSize;
 
 		// statusbar class
 		class StatusBar : public wxStatusBar
@@ -117,8 +121,13 @@ namespace mw
 		void InitializeGlobalMenu();
 		void InitializeStatusBar();
 
+		// window events
+		void OnMove(wxMoveEvent& e);
+		void OnSize(wxSizeEvent& e);
+		void OnClose(wxCloseEvent& e);
+
 	public:
-		FrmMain(wxApp* owner);
+		FrmMain(Application* application);
 	};
 }
 

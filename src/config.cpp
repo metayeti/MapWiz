@@ -113,6 +113,11 @@ mw::Config::T_IntPair mw::Config::GetIntPair(std::string const& category, std::s
 	return T_IntPair(0, 0);
 }
 
+void mw::Config::SetIntPair(std::string const& category, std::string const& key, T_IntPair value)
+{
+	data[category][key] = std::to_string(value.first) + ", " + std::to_string(value.second);
+}
+
 mw::Config::T_UnsignedIntPair mw::Config::GetUnsignedIntPair(std::string const& category, std::string const& key) const
 {
 	auto section = data.get(category);
@@ -129,6 +134,11 @@ mw::Config::T_UnsignedIntPair mw::Config::GetUnsignedIntPair(std::string const& 
 		}
 	}
 	return T_UnsignedIntPair(0U, 0U);
+}
+
+void mw::Config::SetUnsignedIntPair(std::string const& category, std::string const& key, T_UnsignedIntPair value)
+{
+	data[category][key] = std::to_string(value.first) + ", " + std::to_string(value.second);
 }
 
 void mw::Config::Read()
@@ -148,6 +158,8 @@ void mw::Config::Read()
 	}
 }
 
-void mw::Config::Write() const
+void mw::Config::Write()
 {
+	mINI::INIFile ini(FILENAME_CONFIG_INI);
+	ini.write(data);
 }

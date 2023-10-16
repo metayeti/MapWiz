@@ -31,6 +31,8 @@ namespace mw
 		Config config;
 	public:
 		virtual bool OnInit() override;
+
+		Config* GetConfig();
 	};
 }
 

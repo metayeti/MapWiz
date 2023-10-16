@@ -5,7 +5,7 @@
 
 - 0.0.2 -
 [ ] New Map dialog
-[ ] Persistent window geometry
+[x] Persistent window geometry
 [x] Version update util
 
 - 0.0.1 -

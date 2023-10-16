@@ -87,9 +87,19 @@ namespace mw
 		T_IntPair GetIntPair(std::string const& category, std::string const& key) const;
 
 		/**
+		 * Set an integer pair.
+		 */
+		void SetIntPair(std::string const& category, std::string const& key, T_IntPair value);
+
+		/**
 		 * Get an unsigned integer pair value.
 		 */
 		T_UnsignedIntPair GetUnsignedIntPair(std::string const& category, std::string const& key) const;
+
+		/**
+		 * Set an unsigned integer pair.
+		 */
+		void SetUnsignedIntPair(std::string const& category, std::string const& key, T_UnsignedIntPair value);
 
 		/**
 		 * Read the configuration from the configuration file. If the file doesn't exist,
@@ -100,7 +110,7 @@ namespace mw
 		/**
 		 * Write the configuration to the configuration file.
 		 */
-		void Write() const;
+		void Write();
 	};
 }
 
