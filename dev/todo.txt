@@ -1,5 +1,9 @@
-- 0.0.2 -
+- 0.0.3 -
 [ ] Make application icon on high dpi scale correctly (on Windows)
+[ ] Menubar layout
+[ ] Toolbar and basic action icons
+
+- 0.0.2 -
 [ ] New Map dialog
 [ ] Persistent window geometry
 [x] Version update util
@@ -9,4 +13,3 @@
 [x] svg2code util
 [x] About dialog
 [x] Program icon & logo
-[x] Code review & cleanup

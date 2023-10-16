@@ -30,7 +30,7 @@ namespace mw
 	const char* const MAPWIZ_VERSION = "0.0.2 dev";
 
 	// filenames
-	const char* const FILE_CFG_INI = "MapWiz.ini";
+	const char* const FILENAME_CONFIG_INI = "MapWiz.ini";
 
 	// github URLs
 	const char* const URL_GH_MANUAL = "https://github.com/pulzed/MapWiz/tree/main/manual/";

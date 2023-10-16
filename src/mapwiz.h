@@ -32,7 +32,7 @@
 #endif
 
 #if defined(DEBUG) || defined(_DEBUG)
-	#define MW_DEBUG
+	#define MW_DEBUG_BUILD
 #endif
 
 #include "wx/wxprec.h"

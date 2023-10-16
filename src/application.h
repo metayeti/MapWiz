@@ -28,7 +28,7 @@ namespace mw
 	class Application : public wxApp
 	{
 	private:
-		Config cfg;
+		Config config;
 	public:
 		virtual bool OnInit() override;
 	};
