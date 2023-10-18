@@ -30,11 +30,16 @@ namespace mw
 	private:
 		Application* application = nullptr;
 
-		// most recent window geometry (for accurate config post-maximization)
+		// most recent window geometry pre-maximization
 		wxPoint lastWindowPosition;
 		wxSize lastWindowSize;
 
-		// statusbar class
+		////////////////////////////////////////////////////////////////////////
+		// 
+		//  Statusbar class
+		// 
+		////////////////////////////////////////////////////////////////////////
+
 		class StatusBar : public wxStatusBar
 		{
 		private:
@@ -54,7 +59,12 @@ namespace mw
 			virtual ~StatusBar();
 		};
 
-		// menubar structure
+		//////////////////////////////////////////////////////////////////////////////
+		// 
+		//  Menubar structure
+		// 
+		//////////////////////////////////////////////////////////////////////////////
+
 		struct MenuBar
 		{
 			wxMenuBar* root;
@@ -63,6 +73,30 @@ namespace mw
 			struct MenuFile
 			{
 				wxMenu* root;
+				struct Members
+				{
+					wxMenuItem* menuNew;
+					wxMenuItem* menuOpen;
+					struct MenuOpenRecent
+					{
+						wxMenu* root;
+						struct MEMBERS
+						{
+							wxMenuItem* menuNoRecentItems;
+							wxMenuItem* menuRecent[10];
+						} members;
+					} menuOpenRecent;
+					wxMenuItem* menuSave;
+					wxMenuItem* menuSaveAs;
+					wxMenuItem* menuSaveCopy;
+					wxMenuItem* menuSaveAll;
+					wxMenuItem* menuSaveTemplate;
+					wxMenuItem* menuExport;
+					wxMenuItem* menuExportAs;
+					wxMenuItem* menuClose;
+					wxMenuItem* menuCloseAll;
+					wxMenuItem* menuQuit;
+				} members;
 			} menuFile;
 
 			// -- Edit --
@@ -109,22 +143,43 @@ namespace mw
 
 		} menuBar;
 
-		// frame members
+
+		//////////////////////////////////////////////////////////////////////////////
+		// 
+		//  Frame members
+		// 
+		//////////////////////////////////////////////////////////////////////////////
+		
 		StatusBar* statusBar;
 
+		// editor actions
+
+		//void ActionUndo();
+		//void ActionRedo();
+
+
+		//////////////////////////////////////////////////////////////////////////////
+		// 
+		//  Events
+		// 
+		//////////////////////////////////////////////////////////////////////////////
+
 		// menubar events
+		void OnMenuFileNew(wxCommandEvent& e);
+		void OnMenuFileQuit(wxCommandEvent& e);
+
 		void OnMenuHelpUserManual(wxCommandEvent& e);
 		void OnMenuHelpCheckForUpdates(wxCommandEvent& e);
 		void OnMenuHelpAbout(wxCommandEvent& e);
 
+		// window events
+		void OnWindowMove(wxMoveEvent& e);
+		void OnWindowSize(wxSizeEvent& e);
+		void OnWindowClose(wxCloseEvent& e);
+
 		// initialization
 		void InitializeGlobalMenu();
 		void InitializeStatusBar();
-
-		// window events
-		void OnMove(wxMoveEvent& e);
-		void OnSize(wxSizeEvent& e);
-		void OnClose(wxCloseEvent& e);
 
 	public:
 		FrmMain(Application* application);

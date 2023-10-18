@@ -25,8 +25,9 @@ wxDECLARE_APP(mw::Application);
 
 bool mw::Application::OnInit()
 {
-	// load the application configuration
-	config.Read();
+	// load in the application configuration
+	bool firstRun = false;
+	config.Read(firstRun);
 	// fetch window parameters from config
 	bool center = config.GetBool("startup", "center");
 	Config::T_UnsignedIntPair position = config.GetUnsignedIntPair("startup", "position");
@@ -34,11 +35,24 @@ bool mw::Application::OnInit()
 	bool maximize = config.GetBool("startup", "maximize");
 	// setup the main application window
 	FrmMain* window = new FrmMain(this);
-	window->SetSize(window->FromDIP(wxSize(size.first, size.second)));
-	window->SetPosition(wxPoint(position.first, position.second));
+	if (firstRun)
+	{
+		// if this is our first run, treat dimensions specified in the config as DPI-independent values
+		// (this is to ensure that the first run on a high DPI display won't show a tiny window)
+		window->SetSize(window->FromDIP(wxSize(size.first, size.second)));
+	}
+	else
+	{
+		// otherwise treat dimensions as normal
+		window->SetSize(wxSize(size.first, size.second));
+	}
 	if (center || maximize)
 	{
 		window->CenterOnScreen();
+	}
+	else
+	{
+		window->SetPosition(wxPoint(position.first, position.second));
 	}
 	if (maximize)
 	{

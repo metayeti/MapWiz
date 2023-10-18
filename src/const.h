@@ -57,7 +57,7 @@ namespace mw
 	const char* const QUICKHELP_ACTION_FILE_EXPORT_AS = "Export this map as";
 	const char* const QUICKHELP_ACTION_FILE_CLOSE = "Close this map";
 	const char* const QUICKHELP_ACTION_FILE_CLOSE_ALL = "Close all open maps";
-	const char* const QUICKHELP_ACTION_FILE_QUIT = "Quit program";
+	const char* const QUICKHELP_ACTION_FILE_QUIT = "Quit the program";
 
 	const char* const QUICKHELP_ACTION_EDIT_UNDO = "Undo last action";
 	const char* const QUICKHELP_ACTION_EDIT_REDO = "Redo previous undo";

@@ -141,14 +141,19 @@ void mw::Config::SetUnsignedIntPair(std::string const& category, std::string con
 	data[category][key] = std::to_string(value.first) + ", " + std::to_string(value.second);
 }
 
-void mw::Config::Read()
+void mw::Config::Read(bool& firstRun)
 {
 	if (!Util::FileExists(FILENAME_CONFIG_INI))
 	{
+		firstRun = true;
 		// config file is missing, create one
 		std::ofstream out(FILENAME_CONFIG_INI);
 		out << INI_CONFIG;
 		out.close();
+	}
+	else
+	{
+		firstRun = false;
 	}
 	// attempt to read the config file
 	mINI::INIFile ini(FILENAME_CONFIG_INI);

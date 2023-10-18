@@ -26,7 +26,7 @@
 namespace mw
 {
 	// the following entry HAS to exist on line 29 so that "inject_config" utility can propery update it
-	const char* const INI_CONFIG = "; MapWiz configuration\n\n; startup settings\n[startup]\n; if set to true, will center window on launch\ncenter = true\n; window position on launch.\nposition = 0, 0\n; window size on launch.\nsize = 640, 480\n; maximized state on launch.\nmaximized = false\n\n; default mapfile\n[default_map]\n; default grid size (in pixels)\ngrid_size = 50, 50\n; default map size (in cells)\nmap_size = 100, 100\n; default map type (0 = orthogonal, 1 = isometric, 2 = hexagonal)\nmap_type = 0\n\n; recent-files list\n[recent]\n";
+	const char* const INI_CONFIG = "; MapWiz configuration\n\n; startup settings\n[startup]\n; center window on launch\ncenter = yes\n; window position on launch\nposition = 0, 0\n; window size on launch\nsize = 800, 600\n; maximized state on launch\nmaximize = no\n\n; default mapfile\n[default_map]\n; default grid size (in pixels)\ngrid_size = 50, 50\n; default map size (in cells)\nmap_size = 100, 100\n; default map type (0 = orthogonal, 1 = isometric, 2 = hexagonal)\nmap_type = 0\n\n; recent-files list\n[recent]\n";
 }
 
 #endif // MW_INI_RESOURCES_H_

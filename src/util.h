@@ -26,42 +26,63 @@
 namespace mw::Util
 {
 	/**
-	 * Splits a string.
+	 * Split a string.
+	 * 
+	 * @param str Input string.
+	 * @param delimited Split delimiter.
+	 * 
+	 * @return Returns the split result.
 	 */
-	std::vector<std::string> SplitStr(std::string str, std::string const& delimiter);
+	std::vector<std::string> SplitStr(std::string str, std::string const& delimiter = " ");
 
 	/**
-	 * Makes string lowercase.
+	 * Make a string lowercase.
+	 * 
+	 * @param [out] str String to manipulate.
 	 */
 	void StrToLower(std::string& str);
 
 	/**
-	 * Makes string uppercase.
+	 * Make a string uppercase.
+	 * 
+	 * @param [out] str String to manipulate.
 	 */
 	void StrToUpper(std::string& str);
 
 	/**
-	 * Trims whitespace from right-hand side of the string.
+	 * Trim whitespace from right-hand side of a string.
+	 * 
+	 * @param [out] str String to manipulate.
 	 */
 	void TrimStrR(std::string& str);
 
 	/**
-	 * Trims whitespace from left-hand side of the string.
+	 * Trim whitespace from left-hand side of a string.
+	 * 
+	 * @param [out] str String to manipulate.
 	 */
 	void TrimStrL(std::string& str);
 
 	/**
-	 * Trims whitespace from both sides of the string.
+	 * Trim whitespace from both sides of a string.
+	 *
+	 * @param [out] str String to manipulate.
 	 */
 	void TrimStr(std::string& str);
 
 	/**
-	 * Returns whether or not the specified filename exists.
+	 * Check whether or not the specified filename exists.
+	 * 
+	 * @param filename Input filename.
+	 * 
+	 * @return Returns if filename exists.
 	 */
 	bool FileExists(const std::string& filename);
 
 	/**
-	 * Splits an XPM resource into several bitmaps of varying sizes. Returns a bitmap bundle.
+	 * Splits an XPM resource into several bitmaps of varying sizes.
+	 *
+	 * @return Returns a bitmap bundle.
 	 */
 	wxBitmapBundle XPMToBitmapBundle(const char* const* data, int baseWidth, int baseHeight, wxImageResizeQuality quality = wxIMAGE_QUALITY_NORMAL);
 }

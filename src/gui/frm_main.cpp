@@ -20,6 +20,7 @@
 #include "../const.h"
 #include "../config.h"
 #include "../application.h"
+#include "../util.h"
 #include "frm_main.h"
 #include "dlg_about.h"
 #include "../res/svg_resources.h"
@@ -62,6 +63,16 @@ mw::FrmMain::StatusBar::StatusBar(wxWindow* parent, long style)
 
 mw::FrmMain::StatusBar::~StatusBar()
 {
+	
+}
+
+void mw::FrmMain::OnMenuFileNew(wxCommandEvent& e)
+{
+}
+
+void mw::FrmMain::OnMenuFileQuit(wxCommandEvent& e)
+{
+	Close(true);
 }
 
 void mw::FrmMain::OnMenuHelpUserManual(wxCommandEvent& e)
@@ -81,6 +92,35 @@ void mw::FrmMain::OnMenuHelpAbout(wxCommandEvent& e)
 	dlgAbout->ShowModal();
 }
 
+void mw::FrmMain::OnWindowMove(wxMoveEvent& e)
+{
+	if (!IsMaximized())
+	{
+		lastWindowPosition = GetPosition();
+	}
+}
+
+void mw::FrmMain::OnWindowSize(wxSizeEvent& e)
+{
+	if (!IsMaximized())
+	{
+		lastWindowSize = GetSize();
+	}
+}
+
+void mw::FrmMain::OnWindowClose(wxCloseEvent& e)
+{
+	// save config before closing
+	auto* config = application->GetConfig();
+	config->SetBool("startup", "center", false);
+	config->SetUnsignedIntPair("startup", "position", { lastWindowPosition.x, lastWindowPosition.y });
+	config->SetUnsignedIntPair("startup", "size", { lastWindowSize.x, lastWindowSize.y });
+	config->SetBool("startup", "maximize", IsMaximized());
+	config->Write();
+	// destroy this frame
+	Destroy();
+}
+
 void mw::FrmMain::InitializeGlobalMenu()
 {
 	SetMenuBar(menuBar.root = new wxMenuBar());
@@ -89,6 +129,81 @@ void mw::FrmMain::InitializeGlobalMenu()
 	auto& menuFile = menuBar.menuFile;
 	menuBar.root->Append((menuFile.root = new wxMenu()), "&File");
 	{
+		auto& menuNew = menuFile.members.menuNew;
+		menuNew = new wxMenuItem(menuFile.root, wxID_ANY, "&New...\tCtrl+N", QUICKHELP_ACTION_FILE_NEW);
+		///menuNew->SetBitmap(wxBitmapBundle::FromSVG(Util::GetThemeAgnosticSVG(SVG_ICON_NEW, darkMode).c_str(), wxSize(16, 16)));
+		menuNew->SetBitmap(wxBitmapBundle::FromSVG(SVG_ICON_NEW, wxSize(16, 16)));
+		menuFile.root->Append(menuNew);
+		Bind(wxEVT_MENU, &FrmMain::OnMenuFileNew, this, menuNew->GetId());
+
+		menuFile.root->AppendSeparator();
+
+		auto& menuOpen = menuFile.members.menuOpen;
+		menuOpen = new wxMenuItem(menuFile.root, wxID_ANY, "&Open...\tCtrl+O", QUICKHELP_ACTION_FILE_OPEN);
+		menuOpen->SetBitmap(wxBitmapBundle::FromSVG(SVG_ICON_OPEN, wxSize(16, 16)));
+		menuFile.root->Append(menuOpen);
+
+		auto& menuOpenRecent = menuFile.members.menuOpenRecent;
+		menuFile.root->AppendSubMenu((menuOpenRecent.root = new wxMenu()), "Open &Recent", "test");
+		{
+			auto& menuNoRecentItems = menuOpenRecent.members.menuNoRecentItems;
+			menuNoRecentItems = new wxMenuItem(menuOpenRecent.root, wxID_ANY, "(no recent items)");
+			menuOpenRecent.root->Append(menuNoRecentItems);
+			menuNoRecentItems->Enable(false);
+
+		}
+
+		menuFile.root->AppendSeparator();
+
+		auto& menuSave = menuFile.members.menuSave;
+		menuSave = new wxMenuItem(menuFile.root, wxID_ANY, "&Save\tCtrl+S", QUICKHELP_ACTION_FILE_SAVE);
+		menuSave->SetBitmap(wxBitmapBundle::FromSVG(SVG_ICON_SAVE, wxSize(16, 16)));
+		menuFile.root->Append(menuSave);
+
+		auto& menuSaveAs = menuFile.members.menuSaveAs;
+		menuSaveAs = new wxMenuItem(menuFile.root, wxID_ANY, "Save &As...\tCtrl+Shift+S", QUICKHELP_ACTION_FILE_SAVE_AS);
+		menuFile.root->Append(menuSaveAs);
+
+		auto& menuSaveCopy = menuFile.members.menuSaveCopy;
+		menuSaveCopy = new wxMenuItem(menuFile.root, wxID_ANY, "Save Co&py...", QUICKHELP_ACTION_FILE_SAVE_COPY);
+		menuFile.root->Append(menuSaveCopy);
+
+		auto& menuSaveAll = menuFile.members.menuSaveAll;
+		menuSaveAll = new wxMenuItem(menuFile.root, wxID_ANY, "Sa&ve All\tCtrl+Shift+Alt+S", QUICKHELP_ACTION_FILE_SAVE_ALL);
+		menuFile.root->Append(menuSaveAll);
+
+		menuFile.root->AppendSeparator();
+
+		auto& menuSaveTemplate = menuFile.members.menuSaveTemplate;
+		menuSaveTemplate = new wxMenuItem(menuFile.root, wxID_ANY, "Save &Template", QUICKHELP_ACTION_FILE_SAVE_TEMPLATE);
+		menuFile.root->Append(menuSaveTemplate);
+
+		menuFile.root->AppendSeparator();
+
+		auto& menuExport = menuFile.members.menuExport;
+		menuExport = new wxMenuItem(menuFile.root, wxID_ANY, "&Export\tCtrl+E", QUICKHELP_ACTION_FILE_EXPORT);
+		menuFile.root->Append(menuExport);
+
+		auto& menuExportAs = menuFile.members.menuExportAs;
+		menuExportAs = new wxMenuItem(menuFile.root, wxID_ANY, "Ex&port As...\tCtrl+Shift+E", QUICKHELP_ACTION_FILE_EXPORT_AS);
+		menuFile.root->Append(menuExportAs);
+
+		menuFile.root->AppendSeparator();
+
+		auto& menuClose = menuFile.members.menuClose;
+		menuClose = new wxMenuItem(menuFile.root, wxID_ANY, "&Close\tCtrl+F4", QUICKHELP_ACTION_FILE_CLOSE);
+		menuFile.root->Append(menuClose);
+
+		auto& menuCloseAll = menuFile.members.menuCloseAll;
+		menuCloseAll = new wxMenuItem(menuFile.root, wxID_ANY, "Close A&ll\tCtrl+Shift+F4", QUICKHELP_ACTION_FILE_CLOSE_ALL);
+		menuFile.root->Append(menuCloseAll);
+
+		menuFile.root->AppendSeparator();
+
+		auto& menuExit = menuFile.members.menuQuit;
+		menuExit = new wxMenuItem(menuFile.root, wxID_ANY, "&Quit\tAlt+F4", QUICKHELP_ACTION_FILE_QUIT);
+		menuFile.root->Append(menuExit);
+		Bind(wxEVT_MENU, &FrmMain::OnMenuFileQuit, this, menuExit->GetId());
 	}
 
 	// -- Edit --
@@ -151,35 +266,6 @@ void mw::FrmMain::InitializeStatusBar()
 	PositionStatusBar();
 }
 
-void mw::FrmMain::OnMove(wxMoveEvent& e)
-{
-	if (!IsMaximized())
-	{
-		lastWindowPosition = GetPosition();
-	}
-}
-
-void mw::FrmMain::OnSize(wxSizeEvent& e)
-{
-	if (!IsMaximized())
-	{
-		lastWindowSize = GetSize();
-	}
-}
-
-void mw::FrmMain::OnClose(wxCloseEvent& e)
-{
-	// save config before closing
-	auto* config = application->GetConfig();
-	config->SetBool("startup", "center", false);
-	config->SetUnsignedIntPair("startup", "position", { lastWindowPosition.x, lastWindowPosition.y });
-	config->SetUnsignedIntPair("startup", "size", { lastWindowSize.x, lastWindowSize.y });
-	config->SetBool("startup", "maximize", IsMaximized());
-	config->Write();
-	// destroy this frame
-	Destroy();
-}
-
 mw::FrmMain::FrmMain(Application* application)
 : wxFrame(nullptr, wxID_ANY, MAIN_WINDOW_TITLE), application(application)
 {
@@ -198,8 +284,8 @@ mw::FrmMain::FrmMain(Application* application)
 	InitializeGlobalMenu();
 	InitializeStatusBar();
 
-	// bind events
-	Bind(wxEVT_MOVE, &FrmMain::OnMove, this);
-	Bind(wxEVT_SIZE, &FrmMain::OnSize, this);
-	Bind(wxEVT_CLOSE_WINDOW, &FrmMain::OnClose, this);
+	// bind window events
+	Bind(wxEVT_MOVE, &FrmMain::OnWindowMove, this);
+	Bind(wxEVT_SIZE, &FrmMain::OnWindowSize, this);
+	Bind(wxEVT_CLOSE_WINDOW, &FrmMain::OnWindowClose, this);
 }
