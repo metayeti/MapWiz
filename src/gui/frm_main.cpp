@@ -72,7 +72,7 @@ void mw::FrmMain::OnMenuFileNew(wxCommandEvent& e)
 
 void mw::FrmMain::OnMenuFileQuit(wxCommandEvent& e)
 {
-	Close(true);
+	Close(false);
 }
 
 void mw::FrmMain::OnMenuHelpUserManual(wxCommandEvent& e)
@@ -110,6 +110,17 @@ void mw::FrmMain::OnWindowSize(wxSizeEvent& e)
 
 void mw::FrmMain::OnWindowClose(wxCloseEvent& e)
 {
+	// check if we have to veto
+	bool fileNotSaved = false; // TODO move to class scope
+	if (e.CanVeto() && fileNotSaved)
+	{
+		if (wxMessageBox("File has not been saved. Save now?", MAIN_WINDOW_TITLE, wxICON_EXCLAMATION | wxYES_NO | wxCANCEL) == wxYES)
+		{
+			e.Veto();
+			return;
+		}
+	}
+
 	// save config before closing
 	auto* config = application->GetConfig();
 	config->SetBool("startup", "center", false);

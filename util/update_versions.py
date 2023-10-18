@@ -51,8 +51,8 @@ def updateSourcesVersions(sources, version):
 def updateReadme(version):
 	readmefile = os.path.normpath('../README.md')
 	for i, line in enumerate(fileinput.input(readmefile, inplace=True)):
-		if i == 5:
-			print('v' + version)
+		if i == 2:
+			print('2D map editor | v' + version)
 		else:
 			print(line, end='')
 	sys.stdout.write('Updated ' + readmefile + '\n')

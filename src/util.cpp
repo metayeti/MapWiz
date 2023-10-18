@@ -45,12 +45,16 @@ std::vector<std::string> mw::Util::SplitStr(std::string str, std::string const& 
 
 void mw::Util::StrToLower(std::string& str)
 {
-	std::transform(str.begin(), str.end(), str.begin(), std::tolower);
+	std::transform(str.begin(), str.end(), str.begin(), [](unsigned char c) {
+		return std::tolower(c);
+	});
 }
 
 void mw::Util::StrToUpper(std::string& str)
 {
-	std::transform(str.begin(), str.end(), str.begin(), std::toupper);
+	std::transform(str.begin(), str.end(), str.begin(), [](unsigned char c) {
+		return std::toupper(c);
+	});
 }
 
 void mw::Util::TrimStrR(std::string& str)

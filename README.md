@@ -1,8 +1,6 @@
 # MapWiz <img align="left" src="dev/logo/logo_512x512.png?raw=true" height="96">
 
-2D map editor
-
-v0.0.2 dev
+2D map editor | v0.0.2 dev
 
 🚧 -- UNDER CONSTRUCTION -- 🚧
 
