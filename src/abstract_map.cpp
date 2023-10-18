@@ -12,35 +12,42 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 //
-//  application.h
-//  ---
-//  Core Application class and program entry point.
+//  abstract_map.cpp
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#pragma once
+#include "abstract_map.h"
 
-#ifndef MW_APPLICATION_H_
-#define MW_APPLICATION_H_
-
-namespace mw
+mw::AbstractMap::AbstractMap()
 {
-	class Application : public wxApp
-	{
-	private:
-		Config config;
-	public:
-		/**
-		 * Initialize the application and show the main window.
-		 * Also loads the application configuration.
-		 */
-		virtual bool OnInit() override;
-
-		/**
-		 * Retreive (preloaded) application configuration.
-		 */
-		Config* GetConfig();
-	};
 }
 
-#endif // MW_APPLICATION_H_
+mw::AbstractMap::~AbstractMap()
+{
+}
+
+std::string const& mw::AbstractMap::GetName() const
+{
+	return name;
+}
+
+void mw::AbstractMap::SetName(std::string name)
+{
+	this->name = name;
+}
+
+void mw::AbstractMap::RaiseLayer(size_t index)
+{
+}
+
+void mw::AbstractMap::LowerLayer(size_t index)
+{
+}
+
+void mw::AbstractMap::MoveLayer(size_t index, size_t indexTo)
+{
+}
+
+void mw::AbstractMap::SwapLayers(size_t indexFirst, size_t indexSecond)
+{
+}

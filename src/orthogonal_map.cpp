@@ -12,35 +12,9 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 //
-//  application.h
-//  ---
-//  Core Application class and program entry point.
+//  orthogonal_map.cpp
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#pragma once
-
-#ifndef MW_APPLICATION_H_
-#define MW_APPLICATION_H_
-
-namespace mw
-{
-	class Application : public wxApp
-	{
-	private:
-		Config config;
-	public:
-		/**
-		 * Initialize the application and show the main window.
-		 * Also loads the application configuration.
-		 */
-		virtual bool OnInit() override;
-
-		/**
-		 * Retreive (preloaded) application configuration.
-		 */
-		Config* GetConfig();
-	};
-}
-
-#endif // MW_APPLICATION_H_
+//#include "abstract_map.h"
+#include "orthogonal_map.h"

@@ -29,6 +29,10 @@ namespace mw
 {
 	class Config
 	{
+	public:
+		using T_IntPair = std::pair<int64_t, int64_t>;
+		using T_UnsignedIntPair = std::pair<uint64_t, uint64_t>;
+
 	private:
 		// configuration data store
 		mINI::INIStructure data;
@@ -36,15 +40,12 @@ namespace mw
 		/**
 		 * Load the default configuration data. Only implemented as a fallback
 		 * for the most important initialization values in the odd case that
-		 * the generated file cannot be read back for any reason - should never
+		 * the generated file cannot be read back for any reason - should not
 		 * occur in practice.
 		 */
 		void LoadDefaults();
 
 	public:
-		using T_IntPair = std::pair<int64_t, int64_t>;
-		using T_UnsignedIntPair = std::pair<uint64_t, uint64_t>;
-
 		/**
 		 * Retreive a boolean value from the data store.
 		 * 

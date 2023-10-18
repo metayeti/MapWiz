@@ -12,35 +12,24 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 //
-//  application.h
+//  mapwiz.h
 //  ---
-//  Core Application class and program entry point.
+//  Implements the orthogonal map type.
 //
 ////////////////////////////////////////////////////////////////////////////////
 
 #pragma once
 
-#ifndef MW_APPLICATION_H_
-#define MW_APPLICATION_H_
+#ifndef MW_ORTHOGONAL_MAP_H_
+#define MW_ORTHOGONAL_MAP_H_
+
+#include "abstract_map.h"
 
 namespace mw
 {
-	class Application : public wxApp
+	class OrthogonalMap : public AbstractMap
 	{
-	private:
-		Config config;
-	public:
-		/**
-		 * Initialize the application and show the main window.
-		 * Also loads the application configuration.
-		 */
-		virtual bool OnInit() override;
-
-		/**
-		 * Retreive (preloaded) application configuration.
-		 */
-		Config* GetConfig();
 	};
 }
 
-#endif // MW_APPLICATION_H_
+#endif // MW_ORTHOGONAL_MAP_H_

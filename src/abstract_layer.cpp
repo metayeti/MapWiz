@@ -12,35 +12,28 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 //
-//  application.h
-//  ---
-//  Core Application class and program entry point.
+//  abstract_layer.cpp
 //
 ////////////////////////////////////////////////////////////////////////////////
 
-#pragma once
+#include <string>
 
-#ifndef MW_APPLICATION_H_
-#define MW_APPLICATION_H_
+#include "abstract_layer.h"
 
-namespace mw
+mw::AbstractLayer::AbstractLayer()
 {
-	class Application : public wxApp
-	{
-	private:
-		Config config;
-	public:
-		/**
-		 * Initialize the application and show the main window.
-		 * Also loads the application configuration.
-		 */
-		virtual bool OnInit() override;
-
-		/**
-		 * Retreive (preloaded) application configuration.
-		 */
-		Config* GetConfig();
-	};
 }
 
-#endif // MW_APPLICATION_H_
+mw::AbstractLayer::~AbstractLayer()
+{
+}
+
+std::string const& mw::AbstractLayer::GetName() const
+{
+	return name;
+}
+
+void mw::AbstractLayer::SetName(std::string name)
+{
+	this->name = name;
+}

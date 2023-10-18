@@ -25,7 +25,7 @@ wxDECLARE_APP(mw::Application);
 
 bool mw::Application::OnInit()
 {
-	// load in the application configuration
+	// load the application configuration
 	bool firstRun = false;
 	config.Read(firstRun);
 	// fetch window parameters from config
@@ -37,7 +37,7 @@ bool mw::Application::OnInit()
 	FrmMain* window = new FrmMain(this);
 	if (firstRun)
 	{
-		// if this is our first run, treat dimensions specified in the config as DPI-independent values
+		// if this is our first run, treat dimensions specified in the config as DPI-dependent values
 		// (this is to ensure that the first run on a high DPI display won't show a tiny window)
 		window->SetSize(window->FromDIP(wxSize(size.first, size.second)));
 	}

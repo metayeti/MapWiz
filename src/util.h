@@ -31,7 +31,7 @@ namespace mw::Util
 	 * @param str Input string.
 	 * @param delimited Split delimiter.
 	 * 
-	 * @return Returns the split result.
+	 * @return The split result.
 	 */
 	std::vector<std::string> SplitStr(std::string str, std::string const& delimiter = " ");
 
@@ -82,7 +82,7 @@ namespace mw::Util
 	/**
 	 * Splits an XPM resource into several bitmaps of varying sizes.
 	 *
-	 * @return Returns a bitmap bundle.
+	 * @return A bitmap bundle.
 	 */
 	wxBitmapBundle XPMToBitmapBundle(const char* const* data, int baseWidth, int baseHeight, wxImageResizeQuality quality = wxIMAGE_QUALITY_NORMAL);
 }

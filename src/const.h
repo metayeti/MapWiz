@@ -40,10 +40,20 @@ namespace mw
 	const char* const MAIN_WINDOW_TITLE = "MapWiz";
 
 	// map constraints
+	const size_t MAP_NAME_MAX_LENGTH = 100;
 	const size_t MAP_MIN_W = 1;
-	const size_t MAP_MIN_H_ = 1;
+	const size_t MAP_MIN_H = 1;
 	const size_t MAP_MAX_W = 1000;
 	const size_t MAP_MAX_H = 1000;
+
+	// layer constraints
+	const size_t LAYER_NAME_MAX_LENGTH = 100;
+
+	// serialization constants
+	const std::string WIZFILE_BINARY_BGN_POINT = "wiz";
+	const std::string WIZFILE_BINARY_END_POINT = "~mw";
+	const std::string MAPFILE_BINARY_BGN_POINT = "map";
+	const std::string MAPFILE_BINARY_END_POINT = "~";
 	
 	// help strings
 	const char* const QUICKHELP_ACTION_FILE_NEW = "Create a new map";

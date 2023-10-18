@@ -4,6 +4,7 @@
 [ ] Toolbar and basic action icons
 
 - 0.0.2 -
+[ ] Map, layer concepts
 [ ] New Map dialog
 [x] Persistent window geometry
 [x] Version update util

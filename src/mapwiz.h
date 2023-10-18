@@ -35,6 +35,15 @@
 	#define MW_DEBUG_BUILD
 #endif
 
+// disable annoying warnings on VS
+#pragma warning(disable: 4996)
+#pragma warning(disable: 26812)
+#pragma warning(disable: 6011)
+#pragma warning(disable: 26812)
+#pragma warning(disable: 26451)
+#pragma warning(disable: 26495)
+#pragma warning(disable: 26439)
+
 #include "wx/wxprec.h"
 #ifndef WX_PRECOMP
 	#include "wx/wx.h"
