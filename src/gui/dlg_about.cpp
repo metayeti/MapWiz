@@ -52,7 +52,9 @@ mw::DlgAbout::DlgAbout(wxWindow* parent)
 			" (debug)"
 #endif
 			"\n\n"
-			"Copyright © 2024 Danijel Durakovic\n"
+			"Copyright "
+			+ wxString::FromUTF8("\xc2\xa9") +
+			" 2024 Danijel Durakovic\n"
 			"Licensed under the terms of GPLv3"
 		),
 		0,
